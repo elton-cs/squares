@@ -3,6 +3,7 @@ use dojo::model::ModelStorage;
 use starknet::ContractAddress;
 
 use squares::models::counter::Counter;
+use squares::models::coins::Coins;
 
 #[derive(Copy, Drop)]
 struct Store {
@@ -24,5 +25,15 @@ impl StoreImpl of StoreTrait {
     #[inline]
     fn write_counter(ref self: Store, counter: @Counter) {
         self.world.write_model(counter)
+    }
+
+    #[inline]
+    fn read_coins(self: @Store, owner: ContractAddress) -> Coins {
+        self.world.read_model(owner)
+    }
+
+    #[inline]
+    fn write_coins(ref self: Store, coins: @Coins) {
+        self.world.write_model(coins)
     }
 }

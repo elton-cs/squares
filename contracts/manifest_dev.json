@@ -1450,6 +1450,12 @@
   "models": [
     {
       "members": [],
+      "class_hash": "0x7de27006a2c469e56e56fce6e7804af0247a42f4f6deda23164c8221e6deda1",
+      "tag": "squares-Coins",
+      "selector": "0x156490f38f91fe23a076e4223086209a891cf7660efebda964ada2f1055f90b"
+    },
+    {
+      "members": [],
       "class_hash": "0x73a6ce072fa8ce1f805274fcc63b33c3c3a93a4935a16db6e654027a36f1fd",
       "tag": "squares-Counter",
       "selector": "0x4e82c13cf4a9a3be89a8a62da7676bdfe03a3142584f9dc081c8052e445a9a4"
