@@ -1,0 +1,5 @@
+{
+    "cairo1.enableLanguageServer": true,
+    "cairo1.enableScarb": true,
+    "cairo1.languageServerPath": "${userHome}/dev/built_from_src/dojo/target/release/dojo-language-server"
+}
