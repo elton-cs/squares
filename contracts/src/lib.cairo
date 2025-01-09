@@ -5,7 +5,6 @@ mod systems {
 }
 
 mod models {
-    mod counter;
     mod coins;
 }
 

@@ -10,7 +10,6 @@ pub mod Actions {
     use dojo::model::{ModelStorage, ModelValueStorage};
     use dojo::event::EventStorage;
 
-    use squares::models::counter::Counter;
     use squares::components::coins::CoinsComponent;
 
     #[storage]
