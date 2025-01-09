@@ -1252,12 +1252,12 @@
   },
   "contracts": [
     {
-      "address": "0x1ccb62be0121fdc194d2eabb6f0cd15e966984d287d17e77b3c4386c928666d",
-      "class_hash": "0x17475a46e475f45a0b835e0f7fc98e4ab8ccbdb093f9a544f2c19305e150cfc",
+      "address": "0x6514310aad05993644a59972fceb00f4ff1c1b70a1561a53ced30537a98c9dc",
+      "class_hash": "0x455ff8e8da32d04a578e9b96a9c4c60eca4e1997a140ab4cbdcae54d5f44913",
       "abi": [
         {
           "type": "impl",
-          "name": "actions__ContractImpl",
+          "name": "Actions__ContractImpl",
           "interface_name": "dojo::contract::interface::IContract"
         },
         {
@@ -1267,7 +1267,7 @@
         },
         {
           "type": "impl",
-          "name": "actions__DeployedContractImpl",
+          "name": "Actions__DeployedContractImpl",
           "interface_name": "dojo::meta::interface::IDeployedResource"
         },
         {
@@ -1306,9 +1306,30 @@
           ]
         },
         {
+          "type": "function",
+          "name": "dojo_init",
+          "inputs": [],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
           "type": "impl",
           "name": "ActionsImpl",
           "interface_name": "squares::systems::actions::IActions"
+        },
+        {
+          "type": "struct",
+          "name": "core::integer::u256",
+          "members": [
+            {
+              "name": "low",
+              "type": "core::integer::u128"
+            },
+            {
+              "name": "high",
+              "type": "core::integer::u128"
+            }
+          ]
         },
         {
           "type": "interface",
@@ -1316,19 +1337,17 @@
           "items": [
             {
               "type": "function",
-              "name": "increment",
-              "inputs": [],
+              "name": "buy_coins",
+              "inputs": [
+                {
+                  "name": "amount",
+                  "type": "core::integer::u256"
+                }
+              ],
               "outputs": [],
               "state_mutability": "external"
             }
           ]
-        },
-        {
-          "type": "function",
-          "name": "dojo_init",
-          "inputs": [],
-          "outputs": [],
-          "state_mutability": "view"
         },
         {
           "type": "impl",
@@ -1422,7 +1441,13 @@
         },
         {
           "type": "event",
-          "name": "squares::systems::actions::actions::Event",
+          "name": "squares::components::coins::CoinsComponent::Event",
+          "kind": "enum",
+          "variants": []
+        },
+        {
+          "type": "event",
+          "name": "squares::systems::actions::Actions::Event",
           "kind": "enum",
           "variants": [
             {
@@ -1434,15 +1459,21 @@
               "name": "WorldProviderEvent",
               "type": "dojo::contract::components::world_provider::world_provider_cpt::Event",
               "kind": "nested"
+            },
+            {
+              "name": "CoinsEvent",
+              "type": "squares::components::coins::CoinsComponent::Event",
+              "kind": "nested"
             }
           ]
         }
       ],
       "init_calldata": [],
-      "tag": "squares-actions",
-      "selector": "0x632b0d918fa012d97aabb0588a515ffa9741ab46c5b1b35f2ea0948ac12fa1f",
+      "tag": "squares-Actions",
+      "selector": "0x16477b708c15a6365b96f35174208f611a2a11486b3f891bc1f8202dfaa5950",
       "systems": [
-        "increment",
+        "dojo_init",
+        "buy_coins",
         "upgrade"
       ]
     }
@@ -1461,12 +1492,5 @@
       "selector": "0x4e82c13cf4a9a3be89a8a62da7676bdfe03a3142584f9dc081c8052e445a9a4"
     }
   ],
-  "events": [
-    {
-      "members": [],
-      "class_hash": "0x71ed6e06181d4a89977967d310f0ce7924bd46c492b0dcce07ea2a434df51a7",
-      "tag": "squares-Incremented",
-      "selector": "0x3f6550c8129ff5011568165ad372f8c70615e9a000cbd381c69bfd44b3b91d3"
-    }
-  ]
+  "events": []
 }

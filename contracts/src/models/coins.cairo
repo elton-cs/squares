@@ -18,7 +18,7 @@ impl CoinsImpl of CoinsTrait {
         Coins { owner, balance }
     }
 
-    fn init_supply() -> Coins {
+    fn max_supply() -> Coins {
         Coins { owner: Zero::<ContractAddress>::zero(), balance: MAX_SUPPLY }
     }
 

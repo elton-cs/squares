@@ -12,3 +12,7 @@ mod models {
 mod tests {
     mod test_world;
 }
+
+mod components {
+    mod coins;
+}

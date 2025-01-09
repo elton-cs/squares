@@ -1,46 +1,48 @@
-
-// define the interface
 #[starknet::interface]
 trait IActions<T> {
-    fn increment(ref self: T);
+    fn buy_coins(ref self: T, amount: u256);
 }
 
-// dojo decorator
 #[dojo::contract]
-pub mod actions {
+pub mod Actions {
     use super::{IActions};
 
     use dojo::model::{ModelStorage, ModelValueStorage};
     use dojo::event::EventStorage;
 
     use squares::models::counter::Counter;
+    use squares::components::coins::CoinsComponent;
 
-    #[derive(Copy, Drop, Serde)]
-    #[dojo::event]
-    pub struct Incremented {
-        #[key]
-        pub id: felt252,
-        pub count: u64,
+    #[storage]
+    struct Storage {
+        #[substorage(v0)]
+        coins: CoinsComponent::Storage,
+    }
+
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        #[event]
+        CoinsEvent: CoinsComponent::Event,
+    }
+
+    component!(path: CoinsComponent, storage: coins, event: CoinsEvent);
+    impl coins_impl = CoinsComponent::BaseImpl<ContractState>;
+
+    fn dojo_init(ref self: ContractState) {
+        coins_impl::init_supply(self.world_default());
     }
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
-        fn increment(ref self: ContractState) {
-            // Get the default world.
+        fn buy_coins(ref self: ContractState, amount: u256) {
             let mut world = self.world_default();
-
-            let mut counter: Counter = world.read_model(0);
-            counter.count += 1;
-            world.write_model(@counter);
-
-            world.emit_event(@Incremented { id: 0, count: counter.count });
+            coins_impl::buy_coins(world, amount);
         }
     }
 
     #[generate_trait]
-    impl InternalImpl of InternalTrait {
-        /// Use the default namespace "squares". This function is handy since the ByteArray
-        /// can't be const.
+    impl BaseImpl of BaseTrait {
         fn world_default(self: @ContractState) -> dojo::world::WorldStorage {
             self.world(@"squares")
         }
