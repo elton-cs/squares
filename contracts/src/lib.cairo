@@ -6,6 +6,7 @@ mod systems {
 
 mod models {
     mod coins;
+    mod player;
 }
 
 mod tests {
