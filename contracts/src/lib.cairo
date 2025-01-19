@@ -18,4 +18,5 @@ mod components {
     mod coins;
     mod bomba;
     mod square;
+    mod squarelist;
 }
