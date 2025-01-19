@@ -1252,8 +1252,8 @@
   },
   "contracts": [
     {
-      "address": "0x6514310aad05993644a59972fceb00f4ff1c1b70a1561a53ced30537a98c9dc",
-      "class_hash": "0x455ff8e8da32d04a578e9b96a9c4c60eca4e1997a140ab4cbdcae54d5f44913",
+      "address": "0x5770d6de0d4814beb03496ed652d5b65131e019e0740009bf5a71a5bd3b1fbe",
+      "class_hash": "0x50d59d193bcab353b4ed0743b3573217b89c36824910e6e2b351c2e3da68fac",
       "abi": [
         {
           "type": "impl",
@@ -1344,6 +1344,13 @@
                   "type": "core::integer::u256"
                 }
               ],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "user_ticks_bomba",
+              "inputs": [],
               "outputs": [],
               "state_mutability": "external"
             }
@@ -1447,6 +1454,12 @@
         },
         {
           "type": "event",
+          "name": "squares::components::bomba::BombaComponent::Event",
+          "kind": "enum",
+          "variants": []
+        },
+        {
+          "type": "event",
           "name": "squares::systems::actions::Actions::Event",
           "kind": "enum",
           "variants": [
@@ -1464,6 +1477,11 @@
               "name": "CoinsEvent",
               "type": "squares::components::coins::CoinsComponent::Event",
               "kind": "nested"
+            },
+            {
+              "name": "BombaEvent",
+              "type": "squares::components::bomba::BombaComponent::Event",
+              "kind": "nested"
             }
           ]
         }
@@ -1474,11 +1492,18 @@
       "systems": [
         "dojo_init",
         "buy_coins",
+        "user_ticks_bomba",
         "upgrade"
       ]
     }
   ],
   "models": [
+    {
+      "members": [],
+      "class_hash": "0x74bcb09e9b9f227314e7c47bf599a1703cf137e688cccb77f2dac7df5f756a",
+      "tag": "squares-Bomba",
+      "selector": "0x5992e12edc1400c0f3a2ee637bf7f11a02e8761bff0cb6eb9c6f64ba630509a"
+    },
     {
       "members": [],
       "class_hash": "0x7de27006a2c469e56e56fce6e7804af0247a42f4f6deda23164c8221e6deda1",

@@ -16,4 +16,5 @@ mod tests {
 
 mod components {
     mod coins;
+    mod bomba;
 }
