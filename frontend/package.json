@@ -18,9 +18,11 @@
     "vite": "^6.0.5"
   },
   "dependencies": {
+    "@cartridge/controller": "^0.5.5",
     "@dojoengine/core": "1.0.7",
     "@dojoengine/sdk": "1.0.7",
     "@dojoengine/torii-client": "1.0.7",
-    "starknet": "^6.11.0"
+    "starknet": "^6.11.0",
+    "vite-plugin-wasm": "^3.4.1"
   }
 }

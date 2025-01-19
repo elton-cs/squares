@@ -1,10 +1,10 @@
 import { DojoProvider } from "@dojoengine/core";
-import { Account, AccountInterface, type BigNumberish, CairoOption, CairoCustomEnum, type ByteArray, type Uint256 } from "starknet";
+import { Account, AccountInterface, BigNumberish, CairoOption, CairoCustomEnum, ByteArray } from "starknet";
 import * as models from "./models.gen";
 
 export function setupWorld(provider: DojoProvider) {
 
-	const Actions_buyCoins = async (snAccount: Account | AccountInterface, amount: Uint256) => {
+	const Actions_buyCoins = async (snAccount: Account | AccountInterface, amount: U256) => {
 		try {
 			return await provider.execute(
 				snAccount,

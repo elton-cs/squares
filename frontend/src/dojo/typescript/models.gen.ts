@@ -1,6 +1,6 @@
 import type { SchemaType as ISchemaType } from "@dojoengine/sdk";
 
-import { type BigNumberish } from 'starknet';
+import { BigNumberish } from 'starknet';
 
 type WithFieldOrder<T> = T & { fieldOrder: string[] };
 
@@ -81,11 +81,11 @@ export const schema: SchemaType = {
 		Coins: {
 			fieldOrder: ['owner', 'balance'],
 			owner: "",
-		balance: 0,
+			balance: 0,
 		},
 		CoinsValue: {
 			fieldOrder: ['balance'],
-		balance: 0,
+			balance: 0,
 		},
 		Square: {
 			fieldOrder: ['owner', 'square'],
