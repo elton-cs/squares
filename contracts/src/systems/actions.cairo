@@ -1,6 +1,7 @@
 #[starknet::interface]
 trait IActions<T> {
     fn buy_coins(ref self: T, amount: u256);
+    fn start_game(ref self: T);
     fn exit_square(ref self: T);
     fn enter_square_one(ref self: T);
     fn enter_square_two(ref self: T);
@@ -9,13 +10,14 @@ trait IActions<T> {
 #[dojo::contract]
 pub mod Actions {
     use super::{IActions};
-
+    use starknet::{get_caller_address};
     use dojo::model::{ModelStorage, ModelValueStorage};
     use dojo::event::EventStorage;
 
     use squares::components::coins::CoinsComponent;
     use squares::components::bomba::BombaComponent;
     use squares::components::square::SquareComponent;
+    use squares::components::squarelist::SquareListComponent;
 
     #[storage]
     struct Storage {
@@ -25,6 +27,8 @@ pub mod Actions {
         bomba: BombaComponent::Storage,
         #[substorage(v0)]
         square: SquareComponent::Storage,
+        #[substorage(v0)]
+        square_list: SquareListComponent::Storage,
     }
 
     #[event]
@@ -34,6 +38,7 @@ pub mod Actions {
         CoinsEvent: CoinsComponent::Event,
         BombaEvent: BombaComponent::Event,
         SquareEvent: SquareComponent::Event,
+        SquareListEvent: SquareListComponent::Event,
     }
 
     component!(path: CoinsComponent, storage: coins, event: CoinsEvent);
@@ -45,10 +50,16 @@ pub mod Actions {
     component!(path: SquareComponent, storage: square, event: SquareEvent);
     impl square_impl = SquareComponent::BaseImpl<ContractState>;
 
+    component!(path: SquareListComponent, storage: square_list, event: SquareListEvent);
+    impl square_list_impl = SquareListComponent::BaseImpl<ContractState>;
+
     fn dojo_init(ref self: ContractState) {
         let default_world = self.world_default();
         coins_impl::init_supply(default_world);
         bomba_impl::init_bomba(default_world);
+
+        square_list_impl::init_empty_square_list(default_world, 1);
+        square_list_impl::init_empty_square_list(default_world, 2);
     }
 
     #[abi(embed_v0)]
@@ -58,22 +69,39 @@ pub mod Actions {
             coins_impl::buy_coins(world, amount);
         }
 
+
+        fn start_game(ref self: ContractState) {
+            let mut world = self.world_default();
+            let player_address = get_caller_address();
+            square_list_impl::new_player(world, 1, player_address);
+        }
+
         fn exit_square(ref self: ContractState) {
             let mut world = self.world_default();
             bomba_impl::tick_bomba(world);
-            square_impl::exit_square(world);
+            // square_impl::exit_square(world);
+
+            let player_address = get_caller_address();
+            square_list_impl::leave_square_list(world, 1, player_address);
+            square_list_impl::leave_square_list(world, 2, player_address);
         }
 
         fn enter_square_one(ref self: ContractState) {
             let mut world = self.world_default();
             bomba_impl::tick_bomba(world);
-            square_impl::enter_square(world, 1);
+            // square_impl::enter_square(world, 1);
+
+            let player_address = get_caller_address();
+            square_list_impl::join_square_list(world, 1, player_address);
         }
 
         fn enter_square_two(ref self: ContractState) {
             let mut world = self.world_default();
             bomba_impl::tick_bomba(world);
-            square_impl::enter_square(world, 2);
+            // square_impl::enter_square(world, 2);
+
+            let player_address = get_caller_address();
+            square_list_impl::join_square_list(world, 2, player_address);
         }
     }
 
