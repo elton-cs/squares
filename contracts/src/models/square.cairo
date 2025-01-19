@@ -71,12 +71,12 @@ impl SquareListImpl of SquareListTrait {
     }
 
     fn update_previous_player(ref self: SquareList, previous_player: ContractAddress) {
-        assert_address_not_zero(previous_player);
+        // assert_address_not_zero(previous_player);
         self.previous_player = previous_player;
     }
 
     fn update_next_player(ref self: SquareList, next_player: ContractAddress) {
-        assert_address_not_zero(next_player);
+        // assert_address_not_zero(next_player);
         self.next_player = next_player;
     }
 
@@ -103,7 +103,7 @@ impl SquareListImpl of SquareListTrait {
 // helper asserts
 fn assert_address_not_zero(address: ContractAddress) {
     let zero_address = Zero::zero();
-    assert(!(address == zero_address), 'Provided address cannot be 0x0');
+    assert(address != zero_address, 'Provided address cannot be 0x0');
 }
 
 fn assert_index_within_bounds(index: u8) {

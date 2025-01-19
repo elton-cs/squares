@@ -23,6 +23,13 @@ mod SquareListComponent {
             store.write_square_list(@square_list);
         }
 
+        fn new_player(world: WorldStorage, index: u8, player_address: ContractAddress) {
+            let mut store = StoreTrait::new(world);
+
+            let square_list = SquareListTrait::new(index, player_address);
+            store.write_square_list(@square_list);
+        }
+
         // player callable
         fn join_square_list(world: WorldStorage, index: u8, player_address: ContractAddress) {
             let mut store = StoreTrait::new(world);
@@ -48,6 +55,8 @@ mod SquareListComponent {
                 existing_node.update_previous_player(player_node.player);
             }
 
+            store.write_square_list(@zero_node);
+            store.write_square_list(@player_node);
         }
 
         fn leave_square_list(world: WorldStorage, index: u8, player_address: ContractAddress) {
@@ -64,9 +73,14 @@ mod SquareListComponent {
                 previous_node.update_next_player(player_node.next_player);
                 next_node.update_previous_player(player_node.previous_player);
                 player_node.reset();
+                
+                store.write_square_list(@previous_node);
+                store.write_square_list(@next_node);
+                store.write_square_list(@player_node);
             } else {
                 if zero_node.next_player == player_node.player {
                     zero_node.reset();
+                    store.write_square_list(@zero_node);
                 }
             }
         }
