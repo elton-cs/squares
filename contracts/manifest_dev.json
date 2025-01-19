@@ -1252,8 +1252,8 @@
   },
   "contracts": [
     {
-      "address": "0x323be210f0e1738e786a5434b2492809dfe26cef5e7b4b08d1b83565b2a64ac",
-      "class_hash": "0x6952f9670da6ba2289667942c3ca3751c85d6d2ad2d4d1bbbc1c3bcee134bc",
+      "address": "0x4c45dc7c2bdadba03d4ca3e5897c107427ed95f82a467d72c273c88dc48a21a",
+      "class_hash": "0x31c74807373fa1c5b23668073401f916e993ac88649738aca723023d0b65a80",
       "abi": [
         {
           "type": "impl",
@@ -1344,6 +1344,13 @@
                   "type": "core::integer::u256"
                 }
               ],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "start_game",
+              "inputs": [],
               "outputs": [],
               "state_mutability": "external"
             },
@@ -1480,6 +1487,12 @@
         },
         {
           "type": "event",
+          "name": "squares::components::squarelist::SquareListComponent::Event",
+          "kind": "enum",
+          "variants": []
+        },
+        {
+          "type": "event",
           "name": "squares::systems::actions::Actions::Event",
           "kind": "enum",
           "variants": [
@@ -1507,6 +1520,11 @@
               "name": "SquareEvent",
               "type": "squares::components::square::SquareComponent::Event",
               "kind": "nested"
+            },
+            {
+              "name": "SquareListEvent",
+              "type": "squares::components::squarelist::SquareListComponent::Event",
+              "kind": "nested"
             }
           ]
         }
@@ -1517,6 +1535,7 @@
       "systems": [
         "dojo_init",
         "buy_coins",
+        "start_game",
         "exit_square",
         "enter_square_one",
         "enter_square_two",
@@ -1542,6 +1561,12 @@
       "class_hash": "0x2e8eeb948a84db997c211d093cf129b7c5e9be13d8a293c0ed1d81979faf429",
       "tag": "squares-Square",
       "selector": "0x77019a47363ca268ec200efe35dfcd77f2966e796032467f5303bdc9949200e"
+    },
+    {
+      "members": [],
+      "class_hash": "0x7afd734c68a91d38c1691ded1c75d13e07737d895cb4b95bc393d1e3a2ac125",
+      "tag": "squares-SquareList",
+      "selector": "0x4fbef293f5fca6a2432a7a427a41c11a06f4cd0c5641269dccea90ba0a0f768"
     }
   ],
   "events": []

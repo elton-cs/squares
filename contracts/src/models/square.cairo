@@ -71,17 +71,31 @@ impl SquareListImpl of SquareListTrait {
     }
 
     fn update_previous_player(ref self: SquareList, previous_player: ContractAddress) {
-        assert_address_not_zero(previous_player);
+        // assert_address_not_zero(previous_player);
         self.previous_player = previous_player;
     }
 
     fn update_next_player(ref self: SquareList, next_player: ContractAddress) {
-        assert_address_not_zero(next_player);
+        // assert_address_not_zero(next_player);
         self.next_player = next_player;
     }
 
     fn update_square_index(ref self: SquareList, square_index: u8) {
         self.square_index = square_index;
+    }
+
+    fn is_in_list(self: @SquareList) -> bool {
+        let zero_address: ContractAddress = Zero::zero();
+        let prev_is_zero = *self.previous_player == zero_address;
+        let next_is_zero = *self.next_player == zero_address;
+
+        !(prev_is_zero && next_is_zero)
+    }
+
+    fn assert_is_reset(self: @SquareList) {
+        let zero_address: ContractAddress = Zero::zero();
+        assert(*self.previous_player == zero_address, 'previous player not reset');
+        assert(*self.next_player == zero_address, 'next player not reset');
     }
 }
 
@@ -89,7 +103,7 @@ impl SquareListImpl of SquareListTrait {
 // helper asserts
 fn assert_address_not_zero(address: ContractAddress) {
     let zero_address = Zero::zero();
-    assert(!(address == zero_address), 'Provided address cannot be 0x0');
+    assert(address != zero_address, 'Provided address cannot be 0x0');
 }
 
 fn assert_index_within_bounds(index: u8) {
