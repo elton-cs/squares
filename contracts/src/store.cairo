@@ -4,6 +4,7 @@ use starknet::ContractAddress;
 
 use squares::models::coins::Coins;
 use squares::models::bomba::Bomba;
+use squares::models::square::Square;
 
 #[derive(Copy, Drop)]
 struct Store {
@@ -35,5 +36,15 @@ impl StoreImpl of StoreTrait {
     #[inline]
     fn write_bomba(ref self: Store, bomba: @Bomba) {
         self.world.write_model(bomba);
+    }
+
+    #[inline]
+    fn read_square(self: @Store, owner: ContractAddress) -> Square {
+        self.world.read_model(owner)
+    }
+
+    #[inline]
+    fn write_square(ref self: Store, square: @Square) {
+        self.world.write_model(square);
     }
 }
