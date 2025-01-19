@@ -1252,8 +1252,8 @@
   },
   "contracts": [
     {
-      "address": "0x5770d6de0d4814beb03496ed652d5b65131e019e0740009bf5a71a5bd3b1fbe",
-      "class_hash": "0x50d59d193bcab353b4ed0743b3573217b89c36824910e6e2b351c2e3da68fac",
+      "address": "0x323be210f0e1738e786a5434b2492809dfe26cef5e7b4b08d1b83565b2a64ac",
+      "class_hash": "0x6952f9670da6ba2289667942c3ca3751c85d6d2ad2d4d1bbbc1c3bcee134bc",
       "abi": [
         {
           "type": "impl",
@@ -1349,7 +1349,21 @@
             },
             {
               "type": "function",
-              "name": "user_ticks_bomba",
+              "name": "exit_square",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "enter_square_one",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "enter_square_two",
               "inputs": [],
               "outputs": [],
               "state_mutability": "external"
@@ -1460,6 +1474,12 @@
         },
         {
           "type": "event",
+          "name": "squares::components::square::SquareComponent::Event",
+          "kind": "enum",
+          "variants": []
+        },
+        {
+          "type": "event",
           "name": "squares::systems::actions::Actions::Event",
           "kind": "enum",
           "variants": [
@@ -1482,6 +1502,11 @@
               "name": "BombaEvent",
               "type": "squares::components::bomba::BombaComponent::Event",
               "kind": "nested"
+            },
+            {
+              "name": "SquareEvent",
+              "type": "squares::components::square::SquareComponent::Event",
+              "kind": "nested"
             }
           ]
         }
@@ -1492,7 +1517,9 @@
       "systems": [
         "dojo_init",
         "buy_coins",
-        "user_ticks_bomba",
+        "exit_square",
+        "enter_square_one",
+        "enter_square_two",
         "upgrade"
       ]
     }
@@ -1512,9 +1539,9 @@
     },
     {
       "members": [],
-      "class_hash": "0x535aae38f382558960db4ebdc78c953ef7894545de5c74b5944d94ab9dc279b",
-      "tag": "squares-Player",
-      "selector": "0x229de7e8b24096c0e876edee88aac7ca1e98e8ee9eae3eb283235529666f23e"
+      "class_hash": "0x2e8eeb948a84db997c211d093cf129b7c5e9be13d8a293c0ed1d81979faf429",
+      "tag": "squares-Square",
+      "selector": "0x77019a47363ca268ec200efe35dfcd77f2966e796032467f5303bdc9949200e"
     }
   ],
   "events": []

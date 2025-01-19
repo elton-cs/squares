@@ -6,7 +6,7 @@ mod systems {
 
 mod models {
     mod coins;
-    mod player;
+    mod square;
     mod bomba;
 }
 
@@ -17,4 +17,5 @@ mod tests {
 mod components {
     mod coins;
     mod bomba;
+    mod square;
 }
