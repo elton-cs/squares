@@ -1487,9 +1487,9 @@
     },
     {
       "members": [],
-      "class_hash": "0x73a6ce072fa8ce1f805274fcc63b33c3c3a93a4935a16db6e654027a36f1fd",
-      "tag": "squares-Counter",
-      "selector": "0x4e82c13cf4a9a3be89a8a62da7676bdfe03a3142584f9dc081c8052e445a9a4"
+      "class_hash": "0x535aae38f382558960db4ebdc78c953ef7894545de5c74b5944d94ab9dc279b",
+      "tag": "squares-Player",
+      "selector": "0x229de7e8b24096c0e876edee88aac7ca1e98e8ee9eae3eb283235529666f23e"
     }
   ],
   "events": []
