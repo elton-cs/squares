@@ -83,6 +83,20 @@ impl SquareListImpl of SquareListTrait {
     fn update_square_index(ref self: SquareList, square_index: u8) {
         self.square_index = square_index;
     }
+
+    fn is_in_list(self: @SquareList) -> bool {
+        let zero_address: ContractAddress = Zero::zero();
+        let prev_is_zero = *self.previous_player == zero_address;
+        let next_is_zero = *self.next_player == zero_address;
+
+        !(prev_is_zero && next_is_zero)
+    }
+
+    fn assert_is_reset(self: @SquareList) {
+        let zero_address: ContractAddress = Zero::zero();
+        assert(*self.previous_player == zero_address, 'previous player not reset');
+        assert(*self.next_player == zero_address, 'next player not reset');
+    }
 }
 
 
