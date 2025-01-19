@@ -3,6 +3,7 @@ use dojo::model::ModelStorage;
 use starknet::ContractAddress;
 
 use squares::models::coins::Coins;
+use squares::models::bomba::Bomba;
 
 #[derive(Copy, Drop)]
 struct Store {
@@ -23,6 +24,16 @@ impl StoreImpl of StoreTrait {
 
     #[inline]
     fn write_coins(ref self: Store, coins: @Coins) {
-        self.world.write_model(coins)
+        self.world.write_model(coins);
+    }
+
+    #[inline]
+    fn read_bomba(self: @Store, id: bool) -> Bomba {
+        self.world.read_model(id)
+    }
+
+    #[inline]
+    fn write_bomba(ref self: Store, bomba: @Bomba) {
+        self.world.write_model(bomba);
     }
 }
