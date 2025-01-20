@@ -1,13 +1,19 @@
+use starknet::ContractAddress;
+
 #[starknet::interface]
 trait IActions<T> {
-    fn buy_coins(ref self: T, amount: u256);
+    // currently using
     fn start_game(ref self: T);
     fn end_game(ref self: T);
+    fn flip_square(ref self: T);
+    fn read_tick(self: @T) -> u32;
+    fn get_game_updates(self: @T, player_address: ContractAddress) -> (u32, u32, u32, u8);
+
+    // should not be used
     fn exit_square(ref self: T);
     fn enter_square_one(ref self: T);
     fn enter_square_two(ref self: T);
-    fn read_tick(self: @T) -> u32;
-    fn flip_square(ref self: T);
+    fn buy_coins(ref self: T, amount: u256);
 }
 
 #[dojo::contract]
@@ -21,6 +27,8 @@ pub mod Actions {
     use squares::components::bomba::BombaComponent;
     use squares::components::square::SquareComponent;
     use squares::components::squarelist::SquareListComponent;
+    use starknet::ContractAddress;
+
 
     #[storage]
     struct Storage {
@@ -67,27 +75,6 @@ pub mod Actions {
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
-        fn buy_coins(ref self: ContractState, amount: u256) {
-            let mut world = self.world_default();
-            coins_impl::buy_coins(world, amount);
-        }
-
-
-        fn exit_square(ref self: ContractState) {
-            let mut world = self.world_default();
-            bomba_impl::tick_bomba(world);
-            // square_impl::exit_square(world);
-
-            let player_address = get_caller_address();
-            square_list_impl::leave_square_list(world, 1, player_address);
-            square_list_impl::leave_square_list(world, 2, player_address);
-        }
-
-        // fn flip_square(ref self: ContractState) { // get player square index
-        // // use that value to join the other square list
-
-        // }
-
         fn start_game(ref self: ContractState) {
             let mut world = self.world_default();
             let player_address = get_caller_address();
@@ -135,6 +122,36 @@ pub mod Actions {
             square_list_impl::set_player_square_index(world, player_address, index);
             bomba_impl::tick_bomba(world);
         }
+        fn get_game_updates(
+            self: @ContractState, player_address: ContractAddress
+        ) -> (u32, u32, u32, u8) {
+            let mut world = self.world_default();
+            let length_1 = square_list_impl::get_list_length(world, 1);
+            let length_2 = square_list_impl::get_list_length(world, 2);
+            let bomba_tick = bomba_impl::read_tick(world);
+
+            let square_index = square_list_impl::get_player_square_index(world, player_address);
+            (length_1, length_2, bomba_tick, square_index)
+        }
+
+        fn read_tick(self: @ContractState) -> u32 {
+            bomba_impl::read_tick(self.world_default())
+        }
+
+        fn buy_coins(ref self: ContractState, amount: u256) {
+            let mut world = self.world_default();
+            coins_impl::buy_coins(world, amount);
+        }
+
+        fn exit_square(ref self: ContractState) {
+            let mut world = self.world_default();
+            bomba_impl::tick_bomba(world);
+            // square_impl::exit_square(world);
+
+            let player_address = get_caller_address();
+            square_list_impl::leave_square_list(world, 1, player_address);
+            square_list_impl::leave_square_list(world, 2, player_address);
+        }
 
         fn enter_square_one(ref self: ContractState) {
             let mut world = self.world_default();
@@ -152,10 +169,6 @@ pub mod Actions {
 
             let player_address = get_caller_address();
             square_list_impl::join_square_list(world, 2, player_address);
-        }
-
-        fn read_tick(self: @ContractState) -> u32 {
-            bomba_impl::read_tick(self.world_default())
         }
     }
 

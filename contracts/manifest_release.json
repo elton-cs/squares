@@ -1253,7 +1253,7 @@
   "contracts": [
     {
       "address": "0x4c45dc7c2bdadba03d4ca3e5897c107427ed95f82a467d72c273c88dc48a21a",
-      "class_hash": "0x3abb9a5ff275b6b03293fa51adcc63499a33b2e9e2f96b2114117cf4f1b2259",
+      "class_hash": "0x6a72672bbe24c953f9092912cbda8279b8567cac1918416d75b6f13bb1a14a",
       "abi": [
         {
           "type": "impl",
@@ -1337,18 +1337,6 @@
           "items": [
             {
               "type": "function",
-              "name": "buy_coins",
-              "inputs": [
-                {
-                  "name": "amount",
-                  "type": "core::integer::u256"
-                }
-              ],
-              "outputs": [],
-              "state_mutability": "external"
-            },
-            {
-              "type": "function",
               "name": "start_game",
               "inputs": [],
               "outputs": [],
@@ -1360,6 +1348,40 @@
               "inputs": [],
               "outputs": [],
               "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "flip_square",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "read_tick",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::integer::u32"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "get_game_updates",
+              "inputs": [
+                {
+                  "name": "player_address",
+                  "type": "core::starknet::contract_address::ContractAddress"
+                }
+              ],
+              "outputs": [
+                {
+                  "type": "(core::integer::u32, core::integer::u32, core::integer::u32, core::integer::u8)"
+                }
+              ],
+              "state_mutability": "view"
             },
             {
               "type": "function",
@@ -1384,19 +1406,13 @@
             },
             {
               "type": "function",
-              "name": "read_tick",
-              "inputs": [],
-              "outputs": [
+              "name": "buy_coins",
+              "inputs": [
                 {
-                  "type": "core::integer::u32"
+                  "name": "amount",
+                  "type": "core::integer::u256"
                 }
               ],
-              "state_mutability": "view"
-            },
-            {
-              "type": "function",
-              "name": "flip_square",
-              "inputs": [],
               "outputs": [],
               "state_mutability": "external"
             }
@@ -1559,13 +1575,13 @@
       "selector": "0x16477b708c15a6365b96f35174208f611a2a11486b3f891bc1f8202dfaa5950",
       "systems": [
         "dojo_init",
-        "buy_coins",
         "start_game",
         "end_game",
+        "flip_square",
         "exit_square",
         "enter_square_one",
         "enter_square_two",
-        "flip_square",
+        "buy_coins",
         "upgrade"
       ]
     }

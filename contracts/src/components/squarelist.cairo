@@ -65,6 +65,12 @@ mod SquareListComponent {
             store.write_list_length(@list_length);
         }
 
+        fn get_list_length(world: WorldStorage, index: u8) -> u32 {
+            let mut store = StoreTrait::new(world);
+            let list_length = store.read_list_length(index);
+            list_length.length
+        }
+
         // player callable
         fn join_square_list(world: WorldStorage, index: u8, player_address: ContractAddress) {
             let mut store = StoreTrait::new(world);
