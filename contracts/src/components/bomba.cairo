@@ -37,6 +37,12 @@ mod BombaComponent {
 
             did_bomba_explode
         }
+
+        fn read_tick(world: WorldStorage) -> u32 {
+            let mut store = StoreTrait::new(world);
+            let mut bomba = store.read_bomba(BOMBA_RESOURCE_ID);
+            bomba.tick
+        }
     }
 }
 

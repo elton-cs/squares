@@ -38,7 +38,6 @@ struct SquareList {
     next_player: ContractAddress,
 }
 
-
 #[generate_trait]
 impl SquareListImpl of SquareListTrait {
     fn zero_list(index: u8) -> SquareList {
@@ -58,16 +57,13 @@ impl SquareListImpl of SquareListTrait {
         let zero_address: ContractAddress = Zero::zero();
 
         SquareList {
-            square_index: index,
-            player,
-            previous_player: zero_address,
-            next_player: zero_address,
+            square_index: index, player, previous_player: zero_address, next_player: zero_address,
         }
     }
 
     fn reset(ref self: SquareList) {
         self.previous_player = Zero::zero();
-        self.next_player= Zero::zero();
+        self.next_player = Zero::zero();
     }
 
     fn update_previous_player(ref self: SquareList, previous_player: ContractAddress) {
@@ -99,6 +95,28 @@ impl SquareListImpl of SquareListTrait {
     }
 }
 
+#[derive(Copy, Drop, Serde, Debug)]
+#[dojo::model]
+struct ListLength {
+    #[key]
+    square_index: u8,
+    length: u32,
+}
+
+#[generate_trait]
+impl ListLengthImpl of ListLengthTrait {
+    fn new(square_index: u8, length: u32) -> ListLength {
+        ListLength { square_index, length: 0 }
+    }
+
+    fn increment(ref self: ListLength) {
+        self.length += 1;
+    }
+
+    fn decrement(ref self: ListLength) {
+        self.length -= 1;
+    }
+}
 
 // helper asserts
 fn assert_address_not_zero(address: ContractAddress) {
@@ -110,3 +128,4 @@ fn assert_index_within_bounds(index: u8) {
     assert(index > 0, 'Selection cannot be 0');
     assert(index <= NUM_SQUARES, 'Selection is out of bounds');
 }
+

@@ -1253,7 +1253,7 @@
   "contracts": [
     {
       "address": "0x4c45dc7c2bdadba03d4ca3e5897c107427ed95f82a467d72c273c88dc48a21a",
-      "class_hash": "0x6ec04f823c9caa57ef3c352cbbd789974aa00846f5ae90f1e30f18146ebddee",
+      "class_hash": "0x3abb9a5ff275b6b03293fa51adcc63499a33b2e9e2f96b2114117cf4f1b2259",
       "abi": [
         {
           "type": "impl",
@@ -1356,6 +1356,13 @@
             },
             {
               "type": "function",
+              "name": "end_game",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
               "name": "exit_square",
               "inputs": [],
               "outputs": [],
@@ -1385,6 +1392,13 @@
                 }
               ],
               "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "flip_square",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
             }
           ]
         },
@@ -1547,9 +1561,11 @@
         "dojo_init",
         "buy_coins",
         "start_game",
+        "end_game",
         "exit_square",
         "enter_square_one",
         "enter_square_two",
+        "flip_square",
         "upgrade"
       ]
     }
@@ -1566,6 +1582,12 @@
       "class_hash": "0x7de27006a2c469e56e56fce6e7804af0247a42f4f6deda23164c8221e6deda1",
       "tag": "squares-Coins",
       "selector": "0x156490f38f91fe23a076e4223086209a891cf7660efebda964ada2f1055f90b"
+    },
+    {
+      "members": [],
+      "class_hash": "0x4519ad92dce2a0ced45705dbbb8326c33309e6127628cfe9d8e7afee9212bfb",
+      "tag": "squares-ListLength",
+      "selector": "0x6a37b713bb0afc6bfebcb47cbde1947c4cad65da824043a3a21496184c21ee0"
     },
     {
       "members": [],
